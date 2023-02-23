@@ -1,2 +1,2 @@
-# jav_EExercises
-javaデザインパターン
+# StudyStudyshare
+勉強共有
