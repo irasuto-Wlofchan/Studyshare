@@ -11,22 +11,40 @@
     <body class="container">
       <h1 class="display-4 mb-4" th:text="${title}"></h1>
       <p th:text="${msg}"></p>
-      
+      <ul>
+        <li th:each="error : ${#fields.detailedErrors()}"
+        class="text text-danger" th:text="${error.message}"></li>
+      </ul>
       <form method="post" action="/" th:object="${formModel}">
+        <style>.err { color:red }</style>
+        <!-- <ul>
+          <li th:each="error : ${#fields.detailedErrors()}"
+            class="text text-danger" th:text="${error.message}" />
+        </ul> -->
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
           <input type="text" class="form-control" 
-              name="name" th:value="*{name}" />
+              name="name" th:value="*{name}" th:errorclass="err"/>
+              <div th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}" th:errorclass="err">
+              </div>
         </div>
         <div class="mb-3">
           <label for="name" class="form-label">Mail</label>
           <input type="text" class="form-control" 
-              name="mail"  th:value="*{mail}" />
+              name="mail"  th:value="*{mail}" th:errorclass="err"/>
+              <div th:if="${#fields.hasErrors('mail')}"
+                  th:errors="*{mail}" th:errorclass="err">
+              </div>
         </div>
+
         <div class="mb-3">
           <label for="name" class="form-label">Age</label>
           <input type="number" class="form-control" 
-              name="age"  th:value="*{age}" />
+              name="age"  th:value="*{age}" th:errorclass="err"/>
+              <div th:if="${#fields.hasErrors('age')}"
+                  th:errors="*{age}" th:errorclass="err">
+              </div>
         </div>
         <div class="mb-3">
           <label for="memo" class="form-label">Memo</label>
@@ -35,7 +53,7 @@
         </div>
         <input type="submit"  class="btn btn-primary"value="Create"/>
       </form>
-      
+    
       <table class="table">
         <thead>
           <tr><th>ID</th><th>Name</th><th>Mail</th><th>Age</th></tr>
