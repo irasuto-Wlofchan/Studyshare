@@ -23,19 +23,20 @@ public class Person {
   private long id;
   
   @Column(length = 50, nullable = false)
-  @NotBlank
+  @NotBlank(message = "{jakarta.validation.constraints.NotBlank}")
   private String name;
 
   @Column(length = 200, nullable = true)
-  @Email
+  @Email(message = "{jakarta.validation.constraints.Email}")
   private String mail;
 
-  @Min(value = 0)
-  @Max(value = 200)
+  @Min(value = 0,message = "{jakarta.validation.constraints.Min.message}")
+  @Max(value = 200,message = "{jakarta.validation.constraints.Max.message}")
   @Column(nullable = true)
   private Integer age;
   
   @Column(nullable = true)
+  @Phone
   private String memo;
 
   public long getId() {
