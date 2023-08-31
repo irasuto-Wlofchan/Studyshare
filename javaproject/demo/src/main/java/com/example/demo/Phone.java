@@ -13,12 +13,16 @@ import jakarta.validation.ReportAsSingleViolation;
 @Documented
 @Constraint(validatedBy = PhoneValidator.class)
 @Target({ElementType.METHOD,ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
 @ReportAsSingleViolation
 public @interface Phone {
     
     String message() default "電話番号を入力してください";
 
-    Class<?>[] groups() default{};
+    Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default{};
+    Class<? extends Payload>[] payload() default {};
+
+   // boolean onlyNumber() default false;
+
 }
