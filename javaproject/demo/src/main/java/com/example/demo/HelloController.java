@@ -26,6 +26,9 @@ public class HelloController {
     
     @Autowired
     PersonRepository repository;
+
+    @Autowired
+    PersonDAOPersonimpl dao;
     
    @RequestMapping(value="/",method=RequestMethod.GET)
    //@RequestMapping("/")
@@ -38,6 +41,16 @@ public class HelloController {
     mav.addObject("data",list);
     return mav;
   }
+  //find画面の処理
+  @RequestMapping(value = "/find",method = RequestMethod.GET)
+  public ModelAndView index(ModelAndView mav){
+    mav.setViewName("find");
+    mav.addObject("msg","Personのサのサンプルです");
+    Iterable<Person> list = dao.getAll();
+    mav.addObject("date",list);
+    return mav;
+  }
+
 @RequestMapping(value = "/", method = RequestMethod.POST)
 @Transactional
 public ModelAndView form(
@@ -69,6 +82,7 @@ public ModelAndView form(
       mav.addObject("formModel",data.get());                   
       return mav;
     }
+
 
     
   @RequestMapping(value="/edit",method = RequestMethod.POST)
