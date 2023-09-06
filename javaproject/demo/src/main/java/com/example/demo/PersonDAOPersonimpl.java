@@ -8,7 +8,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 
 
 
@@ -29,9 +29,24 @@ public class PersonDAOPersonimpl implements PersonDAO<Person> {
         Query query = entityManager.createQuery("from Person");
         @SuppressWarnings("unchecked")
         List<Person> list = query.getResultList(); 
-        entityManager.close();
+        //entityManager.close();
         return list;
 
+    }
+
+    //データの保存処理
+    public void savePerson(Person person) {
+        entityManager.persist(person);
+    }
+
+    //データの更新処理
+    public void updatePerson(Person person) {
+        entityManager.merge(person);
+    }
+
+    //データの削除処理
+    public void deletePerson(Person person) {
+        entityManager.remove(person);
     }
     
 }

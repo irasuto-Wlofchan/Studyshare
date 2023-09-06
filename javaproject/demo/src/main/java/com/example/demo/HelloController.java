@@ -3,7 +3,7 @@ package com.example.demo;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,10 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.repositories.PersonRepository;
+import org.springframework.web.servlet.ModelAndView;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.transaction.Transactional;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -47,7 +53,9 @@ public class HelloController {
     mav.setViewName("find");
     mav.addObject("msg","Personのサのサンプルです");
     Iterable<Person> list = dao.getAll();
-    mav.addObject("date",list);
+    //テスト用list
+    // List<Person> list = repository.findAll();
+    mav.addObject("data",list);
     return mav;
   }
 
